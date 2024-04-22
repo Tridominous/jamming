@@ -1,10 +1,12 @@
 import React from 'react'
-import './SearchResults';
+import './SearchResults.css';
+import TrackList from '../TrackList/TrackList';
 
-const SearchResults = () => {
+const SearchResults = (props) => {
   return (
     <div className='SearchResults'>
         {/* Add a TrackList component */}
+        <TrackList userSearchResults={props.userSearchResults}/>
     </div>
   )
 }
