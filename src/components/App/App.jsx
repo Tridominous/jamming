@@ -3,6 +3,7 @@ import './App.css';
 
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
+import SearchBar from '../SearchBar/SearchBar'
 
 function App() {
 
@@ -79,6 +80,10 @@ function App() {
     const trackUris = playlistTracks.map((track) => track.uri);
   })
 
+  const search = useCallback((term) => {
+    console.log(term)
+  }, []);
+
   return (
     <div>
       <h1>
@@ -86,7 +91,7 @@ function App() {
       </h1>
       <div className='App'>
         {/* Add a SearchBar component */}
-
+        <SearchBar onSearch={search} />
         <div className='App-playlist'>
           {/* Add a SearchResults component */}
           <SearchResults userSearchResults={searchResults} onAdd={addTrack} />
