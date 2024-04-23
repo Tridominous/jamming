@@ -8,7 +8,13 @@ const TrackList = (props) => {
     <div className='TrackList'>
         {/* map method renders a set of track components */}
         { userSearchResults.map((track) => (
-            <Track key={track.id} track={track}/>
+            <Track 
+              key={track.id} 
+              track={track}
+              isRemoval={props.isRemoval}
+              onAdd={props.onAdd}
+              onRemove={props.onRemove}
+              />
       ))} 
     </div>
   )

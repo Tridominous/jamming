@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import './App.css';
 
 import SearchResults from '../SearchResults/SearchResults';
@@ -8,18 +8,18 @@ function App() {
 
   const [playlistName, setPlaylistName] = useState('My Playlist1');
   const [playlistTracks, setPlaylistTracks] = useState([
-    {
-      id: 1,
-      name: 'playlist 1',
-      artist: ' playlist artist 1',
-      album: 'playlist album 1'
-    },
-    {
-      id: 2,
-      name: 'Playlist 2',
-      artist: 'playlist artist 2',
-      album: 'playlist album 2'
-    },
+    // {
+    //   id: 1,
+    //   name: 'playlist 1',
+    //   artist: ' playlist artist 1',
+    //   album: 'playlist album 1'
+    // },
+    // {
+    //   id: 2,
+    //   name: 'Playlist 2',
+    //   artist: 'playlist artist 2',
+    //   album: 'playlist album 2'
+    // }
   ]);
 
   
@@ -41,9 +41,43 @@ function App() {
       name: 'track 3',
       artist: 'artist 3',
       album: 'album 3'
+    },
+    {
+      id: 4,
+      name: 'track 4',
+      artist: 'artist 4',
+      album: 'album 4'
+    },
+    {
+      id: 5,
+      name: 'track 5',
+      artist: 'artist 5',
+      album: 'album 5'
     }
   ])
 
+  const addTrack = useCallback(
+    (track) => {
+      if(playlistTracks.some((savedTrack) => savedTrack.id == track.id))
+      return;
+    setPlaylistTracks((prev) => [...prev, track])
+    },
+    [playlistTracks]
+  )
+
+  const removeTrack = useCallback(
+    (track) => {
+      setPlaylistTracks((prev) => prev.filter((currentTrack) => currentTrack.id !== track.id))
+    }, []
+  )
+
+  const updatePlaylistName = useCallback((name) => {
+    setPlaylistName(name)
+  }, []);
+
+  const savePlaylist = useCallback(() => {
+    const trackUris = playlistTracks.map((track) => track.uri);
+  })
 
   return (
     <div>
@@ -55,9 +89,15 @@ function App() {
 
         <div className='App-playlist'>
           {/* Add a SearchResults component */}
-          <SearchResults userSearchResults={searchResults} />
+          <SearchResults userSearchResults={searchResults} onAdd={addTrack} />
           {/* Add a Playlist component */}
-          <Playlist playlistName={playlistName} playlistTracks={playlistTracks} />
+          <Playlist 
+            playlistName={playlistName} 
+            playlistTracks={playlistTracks} 
+            onRemove={removeTrack} 
+            onNameChange={updatePlaylistName}
+            onSave={savePlaylist}
+            />
         </div>
       </div>
     </div>
