@@ -3,7 +3,7 @@
 let accessToken;
 const clientID = import.meta.env.VITE_CLIENT_ID;
 
-const redirectUrl = "http://localhost:5173/";
+const redirectUrl = "https://jamesjamming.surge.sh/";
 
 export const Spotify = {
     getAccessToken() {
