@@ -3,7 +3,7 @@
 let accessToken;
 const clientID = import.meta.env.VITE_CLIENT_ID;
 
-const redirectUrl = "https://jamesjamming.surge.sh/";
+const redirectUrl = "https://jamesjamming101.surge.sh/";
 
 export const Spotify = {
     getAccessToken() {
