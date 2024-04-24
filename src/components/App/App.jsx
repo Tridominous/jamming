@@ -3,7 +3,8 @@ import './App.css';
 
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
-import SearchBar from '../SearchBar/SearchBar'
+import SearchBar from '../SearchBar/SearchBar';
+import { Spotify } from '../../util/Spotify/Spotify';
 
 function App() {
 
@@ -78,10 +79,14 @@ function App() {
 
   const savePlaylist = useCallback(() => {
     const trackUris = playlistTracks.map((track) => track.uri);
-  })
+    Spotify.savePlaylist(playlistName, trackUris).then(() => {
+      setPlaylistName("New Playlist");
+      setPlaylistTracks([]);
+    })
+  }, [playlistName, playlistTracks])
 
   const search = useCallback((term) => {
-    console.log(term)
+    Spotify.search(term).then(setSearchResults);
   }, []);
 
   return (
